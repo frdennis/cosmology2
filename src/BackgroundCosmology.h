@@ -21,14 +21,26 @@ class BackgroundCosmology{
     double OmegaR;                  // Photon density today (follows from TCMB)
     double OmegaNu;                 // Neutrino density today (follows from TCMB and Neff)
     double OmegaK;                  // Curvature density = 1 - OmegaM - OmegaR - OmegaNu - OmegaLambda
+    double OmegaM;                  // Combined mass (CDM + Baryons)
+    double OmegaRad;                // Combined radiation (R + Nu)
     double H0;                      // The Hubble parameter today H0 = 100h km/s/Mpc
 
+    // Useful parameter
+    int mytruth;
+
     // Start and end of x-integration (can be changed)
-    double x_start = Constants.x_start;
-    double x_end   = Constants.x_end;
+    double x_start = log(1e-20); // Constants.x_start;
+    double x_end   = 2.0; // Constants.x_end;
+
+    // Vectors to be made
+    Vector x_array;
+    Vector Hp_array;
 
     // Splines to be made
     Spline eta_of_x_spline{"eta"};
+    Spline Hp_of_x_spline{"Hp"};
+    Spline t_of_x_spline{"t"};
+    Spline x_of_t_spline{"x"};
  
   public:
 
@@ -58,6 +70,10 @@ class BackgroundCosmology{
     double Hp_of_x(double x) const;
     double dHpdx_of_x(double x) const;
     double ddHpddx_of_x(double x) const;
+    double t_of_x(double x) const;
+    double x_of_t(double t) const;
+    double comoving_distance(double eta) const;
+
     double get_OmegaB(double x = 0.0) const; 
     double get_OmegaM(double x = 0.0) const; 
     double get_OmegaR(double x = 0.0) const;
