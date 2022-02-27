@@ -58,7 +58,7 @@ ax.legend()
 ax.set_ylabel("Distance [Gpc]")
 ax.set_xlabel("Redshift z")
 ax.grid()
-plt.savefig('redshift_data.pdf')
+plt.savefig('figures/milestone1/'+'redshift_data.pdf')
 plt.show()
 
 """ Luminosity data """
@@ -76,7 +76,7 @@ ax.plot(z, 4400*z, label=r"Naive Hubble Distance ($d = (c/H_0)z$)", color="k", l
 ax.legend(); ax.grid()
 ax.set_xlabel("Redshift z"); ax.set_ylabel("Distance [Mpc]")
 ax.set_xscale("log"); ax.set_yscale("log")
-plt.savefig('luminosity_data.pdf')
+plt.savefig('figures/milestone1/'+'luminosity_data.pdf')
 plt.show()
 
 """ a(t) """
@@ -102,7 +102,7 @@ ax.set_yscale("log"); ax.set_xscale("log")
 ax.set_xlabel("$t [Gyrs]$")
 ax.set_ylabel("Scalefactor $a$")
 ax.legend()
-plt.savefig('scalefactor.pdf')
+plt.savefig('figures/milestone1/'+'scalefactor.pdf')
 plt.show()
 
 """ Reduced Hubble parameter """
@@ -117,7 +117,7 @@ ax.vlines(a_mat_rad, H.min(), H.max()*1.01, color='b', ls='--', label='Radiation
 ax.vlines(a_mat_lambda, H.min(), H.max()*1.01, color='r', ls='--', label='Matter-Dark energy eq')
 ax.vlines(a_acc, H.min(), H.max()*1.01, color='g', ls='--', label='Accelerated universe')
 ax.legend()
-plt.savefig('reduced_hubble.pdf')
+plt.savefig('figures/milestone1/'+'reduced_hubble.pdf')
 plt.show()
 
 """ Hp """
@@ -132,7 +132,7 @@ ax.vlines(a_mat_rad, Hp.min(), Hp.max()*1.01, color='b', ls='--', label='Radiati
 ax.vlines(a_mat_lambda, Hp.min(), Hp.max()*1.01, color='r', ls='--', label='Matter-Dark energy eq')
 ax.vlines(a_acc, Hp.min(), Hp.max()*1.01, color='g', ls='--', label='Accelerated universe')
 ax.legend()
-plt.savefig('Hp.pdf')
+plt.savefig('figures/milestone1/'+'Hp.pdf')
 plt.show()
 
 """ Conformal time eta(x) """
@@ -146,7 +146,7 @@ ax.vlines(a_mat_rad, eta.min(), 1.01*eta.max(), color='b', ls='--', label='Radia
 ax.vlines(a_mat_lambda, eta.min(), 1.01*eta.max(), color='r', ls='--', label='Matter-Dark energy eq')
 ax.vlines(a_acc, eta.min(), 1.01*eta.max(), color='g', ls='--', label='Accelerated universe')
 ax.legend()
-plt.savefig('eta.pdf')
+plt.savefig('figures/milestone1/'+'eta.pdf')
 plt.show()
 
 """ Density parameters """
@@ -168,14 +168,14 @@ ax.vlines(a_acc, OmegaLambda.min(), OmegaLambda.max()*1.01, color='g', ls='--', 
 ax.legend(); ax.grid()
 ax.set_xscale("log")
 ax.set_ylabel(r'$\Omega_i$'); ax.set_xlabel('Scalefactor a')
-plt.savefig('density_parameters.pdf')
+plt.savefig('figures/milestone1/'+'density_parameters.pdf')
 plt.show()
 
 fig, ax = plt.subplots(figsize=(6,5))
 ax.plot(a, (OmegaR+OmegaNu)+(OmegaB+OmegaCDM)+OmegaLambda - 1)
 ax.set_ylabel(r'Devianse in $\Sigma \Omega$ from 1'); ax.set_xlabel('Scalefactor a')
 ax.set_xscale('log'); ax.grid()
-plt.savefig('error.pdf')
+plt.savefig('figures/milestone1/'+'error.pdf')
 plt.show()
 
 """ eta H """
@@ -190,7 +190,7 @@ ax.vlines(a_mat_rad, y.min(), y.max()*1.01, color='b', ls='--', label='Radiation
 ax.vlines(a_mat_lambda, y.min(), y.max()*1.01, color='r', ls='--', label='Matter-Dark energy eq')
 ax.vlines(a_acc, y.min(), y.max()*1.01, color='g', ls='--', label='Accelerated universe')
 ax.legend()
-plt.savefig('eta_H.pdf')
+plt.savefig('figures/milestone1/'+'eta_H.pdf')
 plt.show()
 
 """ Derivatives of H_p """
@@ -206,5 +206,5 @@ ax.vlines(a_mat_lambda, (dHp_dx/Hp).min(), (ddHpddx/Hp).max()*1.01, color='r', l
 ax.vlines(a_acc, (dHp_dx/Hp).min(), (ddHpddx/Hp).max()*1.01, color='g', ls='--', label='Accelerated universe')
 ax.legend()
 ax.grid()
-plt.savefig("derivatives.pdf")
+plt.savefig('figures/milestone1/'+"derivatives.pdf")
 plt.show()
