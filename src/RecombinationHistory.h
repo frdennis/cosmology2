@@ -14,6 +14,29 @@ class RecombinationHistory{
 
     // The cosmology we use
     BackgroundCosmology *cosmo = nullptr;
+
+    // Physical constants
+    const double m_e         = Constants.m_e;
+    const double sigma_T     = Constants.sigma_T;
+    const double pi          = M_PI;
+    const double alpha       = sqrt(sigma_T*3/(8*pi))*m_e; // kg m
+    const double TCMB0       = 2.7255; // K
+    const double k_b         = Constants.k_b;
+    const double G           = Constants.G;
+    const double c           = Constants.c;
+    const double hbar        = Constants.hbar;
+    const double m_H         = Constants.m_H;
+    const double epsilon_0   = Constants.epsilon_0;
+    const double H0_over_h   = Constants.H0_over_h;
+    const double lambda_2s1s = Constants.lambda_2s1s;
+
+    const double rho_c0      = 3*pow(cosmo->H_of_x(0.0), 2)/(8*pi*G);
+
+    const double OmegaB0     = cosmo->get_OmegaB(0.0);
+    const double OmegaR0     = cosmo->get_OmegaR(0.0);
+
+    // Dimensions
+    const double dimension_Xe_saha = pow(hbar, -3)*pow(k_b, 3./2);
     
     // Helium fraction
     double Yp;
@@ -49,9 +72,12 @@ class RecombinationHistory{
     void solve_for_optical_depth_tau();
 
     // Splines contained in this class
-    Spline log_Xe_of_x_spline{"Xe"};
+    Spline Xe_of_x_spline{"Xe"};
+    Spline ne_of_x_spline{"ne"};
     Spline tau_of_x_spline{"tau"}; 
     Spline g_tilde_of_x_spline{"g"};  
+    Spline Tb_of_x_spline{"Tb"};
+    Spline deriv_tau_of_x_spline{"dtaudx"};
 
   public:
 
@@ -79,6 +105,7 @@ class RecombinationHistory{
     double ddgddx_tilde_of_x(double x) const;
     double Xe_of_x(double x) const;
     double ne_of_x(double x) const;
+    double Tb_of_x(double x) const;
     double get_Yp() const;
 };
 
