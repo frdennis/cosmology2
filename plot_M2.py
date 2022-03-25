@@ -129,9 +129,13 @@ plt.tight_layout()
 plt.savefig(path+'visibility_function.pdf')
 plt.show()
 
+def T(a):
+    return 2.7255/a
+
 
 fig, ax = plt.subplots(figsize=figsize)
 ax.plot(a, Tb, label=r'$T_b$')
+ax.plot(a, T(a), label=r'$T$', ls='--')
 ax.vlines(a[i], Tb.min(), Tb.max(), 'k', ls='--', label='Recombination')
 ax.set_ylabel(r"Baryon Temperature [K]")
 ax.set_xlabel(r'Scalefactor $a$')
