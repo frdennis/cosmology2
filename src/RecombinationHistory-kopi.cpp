@@ -74,7 +74,7 @@ void RecombinationHistory::solve_number_density_electrons(){
   // of...
 
   // Define ODE
-  ODESolver peebles_Xe_ode(1e-6, 1e-12, 1e-12);
+  ODESolver peebles_Xe_ode;
   ODEFunction dXedx = [&](double x, const double *Xe, double *dXedx){
     return rhs_peebles_ode(x, Xe, dXedx);
   };
@@ -186,6 +186,18 @@ int RecombinationHistory::rhs_peebles_ode(double x, const double *Xe, double *dX
   double R      = 4*OmegaR0/(3*a*OmegaB0);
   double dtaudx = - c*X_e*n_H*sigma_T/H;
   double A      = 2*m_H/m_e*R*dtaudx;
+
+  std::cout << "X_e   " << X_e << '\n';
+  std::cout << "Cr   " << Cr << '\n';
+  std::cout << "lambda_2s1s   " << lambda_2s1s << '\n';
+  std::cout << "lambda_a   " << lambda_a << '\n';
+
+  std::cout << "y   " << y << '\n';
+  std::cout << "Tb   " << Tb << '\n';
+  std::cout << "R   " << R << '\n';
+  std::cout << "dtaudx   " << dtaudx << '\n';
+  std::cout << "A   " << A << '\n';
+  std::cout << '\n'; 
   
   dXedx[1] = - y - 1 + A*y;
 
