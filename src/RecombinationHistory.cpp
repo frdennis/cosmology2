@@ -68,6 +68,7 @@ void RecombinationHistory::solve_number_density_electrons(){
     Tb_arr[i] = TCMB0*exp(-x_array[i]); // baryon temp is approx photon temp
     i += 1; // udate to next time step
   }
+  i--;
   // The Peebles algorithm: 
   // Once outside saha regime we make a temporary spline of 
   // the solved peebles equation that we can extract values
@@ -244,11 +245,6 @@ void RecombinationHistory::solve_for_optical_depth_tau(){
   double sum = 0.0; // Use sum to normalize g
   for (int i = 0; i<npts; i++){
     g_tilde_arr[i] = -dtaudx_of_x(x_array_norm[i])*exp(-tau_of_x(x_array_norm[i]));
-    sum += g_tilde_arr[i]; // add every element to sum 
-  }
-  // Normalize g by dividing every element by sum
-  for (int i = 0; i<npts; i++){
-    g_tilde_arr[i] = g_tilde_arr[i]/sum; 
   }
 
   // Spline g

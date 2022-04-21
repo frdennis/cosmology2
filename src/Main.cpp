@@ -55,7 +55,7 @@ int main(int argc, char **argv){
   rec.output("recombination.txt");
   
   // Remove when module is completed
-  return 0;
+  // return 0;
 
   //=========================================================================
   // Module III

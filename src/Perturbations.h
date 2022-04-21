@@ -18,6 +18,13 @@ class Perturbations{
 
     BackgroundCosmology *cosmo = nullptr;
     RecombinationHistory *rec  = nullptr;
+
+    // Constants
+    double H0         = cosmo->get_H0();
+    double OmegaR0    = cosmo->get_OmegaR(0.0);
+    double OmegaB0    = cosmo->get_OmegaB(0.0);
+    double OmegaCDM0  = cosmo->get_OmegaCDM(0.0);
+    double OmegaNu0   = 3.046*7.0/8.0*pow((4.0/11.0), (4.0/3.0))*OmegaR0; //cosmo->get_OmegaNu(0.0);
    
     // The scales we integrate over
     const int n_k        = 100;

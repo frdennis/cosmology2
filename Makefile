@@ -21,6 +21,7 @@ OPTIONS += -D_GLIBCXX_DEBUG
 
 # Show warnings if atempting to evaluate a spline out of bounds
 OPTIONS += -D_SPLINE_WARNINGS_ON
+# CC += -fsanitize=address
 
 # Show info about the solution as we integrate
 # OPTIONS = -D_FIDUCIAL_VERBOSE_ODE_SOLVER_TRUE
