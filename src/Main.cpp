@@ -12,11 +12,17 @@ int main(int argc, char **argv){
   //=========================================================================
 
   // Background parameters
-  double h           = 0.67;
+  double h           = 0.674;
   double OmegaB      = 0.05;
   double OmegaCDM    = 0.267;
   double OmegaK      = 0.0;
-  double Neff        = 3.046;
+  double Neff;
+  if (Constants.neutrinos){
+    Neff        = 3.046;
+  }
+  else{
+    Neff        = 0.0;
+  }
   double TCMB        = 2.7255;
 
   // Recombination parameters
@@ -67,8 +73,14 @@ int main(int argc, char **argv){
   pert.info();
   
   // Output perturbation quantities
-  double kvalue = 0.01 / Constants.Mpc;
+  double kvalue = 0.001 * h / Constants.Mpc;
+  pert.output(kvalue, "perturbations_k0.001.txt");
+
+  kvalue = 0.01 * h / Constants.Mpc;
   pert.output(kvalue, "perturbations_k0.01.txt");
+
+  kvalue = 0.1 * h / Constants.Mpc;
+  pert.output(kvalue, "perturbations_k0.1.txt");
   
   // Remove when module is completed
   return 0;

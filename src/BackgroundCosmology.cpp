@@ -24,7 +24,7 @@ BackgroundCosmology::BackgroundCosmology(
   double pi = 3.14159265358979;
   OmegaR  = 2*std::pow(pi,2)/30 * std::pow(Constants.k_b*TCMB,4)/pow(Constants.hbar, 3)/pow(Constants.c,5)
   * 8*pi*Constants.G/(3*std::pow(H0,2));  // Photon density today (follows from TCMB):
-  OmegaNu =  3.046*7.0/8.0*pow((4.0/11.0), (4.0/3.0))*OmegaR;    // Neutrino density today (master students ignore this)
+  OmegaNu = Neff*7.0/8.0*pow((4.0/11.0), (4.0/3.0))*OmegaR;    // Neutrino density today (master students ignore this)
   // and lastly, dark energy parameter which follows from a(today) = 1 ...
   OmegaLambda = 1 - (OmegaB + OmegaCDM + OmegaR + OmegaNu + OmegaK);
 

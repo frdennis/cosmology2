@@ -29,8 +29,8 @@ class BackgroundCosmology{
     int mytruth;
 
     // Start and end of x-integration (can be changed)
-    double x_start = log(1e-20); // Constants.x_start;
-    double x_end   = 2.0; // Constants.x_end;
+    double x_start = Constants.x_start;
+    double x_end   = Constants.x_end;
 
     // Vectors to be made
     Vector x_array;

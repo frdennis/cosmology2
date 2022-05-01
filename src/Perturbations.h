@@ -27,12 +27,12 @@ class Perturbations{
     double OmegaNu0   = 3.046*7.0/8.0*pow((4.0/11.0), (4.0/3.0))*OmegaR0; //cosmo->get_OmegaNu(0.0);
    
     // The scales we integrate over
-    const int n_k        = 100;
+    const int n_k        = 200;
     const double k_min   = Constants.k_min;
     const double k_max   = Constants.k_max;
     
     // Start and end of the time-integration
-    const int n_x        = 1000;
+    const int n_x        = 4000;
     const double x_start = Constants.x_start;
     const double x_end   = Constants.x_end;
 
@@ -72,7 +72,7 @@ class Perturbations{
     int rhs_tight_coupling_ode(double x, double k, const double *y, double *dydx);
     
     // Compute the time when tight coupling ends
-    double get_tight_coupling_time(const double k) const;
+    std::pair<double,int> get_tight_coupling_time(const double k) const;
     
     //==========================================================
     // [2] The full ODE system 

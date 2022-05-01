@@ -30,8 +30,8 @@ OmegaB0       = 0.05
 OmegaCDM0     = 0.267
 OmegaLambda0  = 0.682945
 OmegaK0       = 0
-OmegaNu0      = 0
 OmegaR0       = 5.50896e-05
+OmegaNu0      = 3.046*7.0/8.0*(4/11)**(4/3)*OmegaR0
 
 a_mat_rad = (OmegaR0 + OmegaNu0)/(OmegaB0 + OmegaCDM0)
 a_mat_lambda = ((OmegaCDM0+OmegaB0)/(OmegaLambda0))**(1/3)
