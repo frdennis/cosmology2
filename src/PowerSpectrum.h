@@ -28,9 +28,25 @@ class PowerSpectrum {
     double kpivot_mpc = 0.05;
 
     // The k-values we compute Theta_ell(k) etc. for
-    const int n_k      = 100;
+    const double eta0   = cosmo->eta_of_x(0.0);
+
+    // const int n_k      = 5000;
     const double k_min = Constants.k_min;
     const double k_max = Constants.k_max;
+
+    double dk          = 2*M_PI/(6*eta0);
+    const int n_k      = (k_max - k_min)/dk;
+    Vector k_array     = Utils::linspace(k_min, k_max, n_k);
+
+    double dlogk       = 2.*M_PI/(32.*eta0); // (32)
+    const int n_logk   = (k_max - k_min)/dlogk;
+    Vector log_k_array = exp(Utils::linspace(log(k_min), log(k_max), n_logk));
+
+    // x-values
+    int n_x         = 600;
+    double x_start  = -10.5; // log(1/(2500 + 1)); //-10.5;
+    double x_end    = 0.0;
+    Vector x_array  = Utils::linspace(x_start, x_end, n_x);
     
     // The ells's we will compute Theta_ell and Cell for
     Vector ells{ 
@@ -71,6 +87,8 @@ class PowerSpectrum {
     // Theta_ell(k) and ThetaE_ell(k) for polarization
     std::vector<Spline> thetaT_ell_of_k_spline;
     std::vector<Spline> thetaE_ell_of_k_spline;
+    std::vector<Spline> NuT_ell_of_k_spline;
+
     
     //=====================================================================
     // [3] Integrate to get power-spectrum
@@ -88,6 +106,7 @@ class PowerSpectrum {
     Spline cell_TT_spline{"cell_TT_spline"};
     Spline cell_TE_spline{"cell_TE_spline"};
     Spline cell_EE_spline{"cell_EE_spline"};
+    Spline cell_Nu_spline{"cell_Nu_spline"};
 
   public:
 
@@ -117,6 +136,9 @@ class PowerSpectrum {
 
     // Output Cells in units of l(l+1)/2pi (muK)^2
     void output(std::string filename) const;
+    void output_x(std::string filename) const;
+    //void output_bessel(std::string filename) const;
+
 };
 
 #endif

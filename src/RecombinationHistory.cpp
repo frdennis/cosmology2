@@ -115,7 +115,7 @@ void RecombinationHistory::solve_number_density_electrons(){
   double ne;
 
   // Now we are able to get the values in the Peebles regime
-  while(not saha_regime and i < npts_rec_arrays){
+  while(i < npts_rec_arrays){
     n_H         = (OmegaB0*rho_c0/(m_H*pow(exp(x_array[i]), 3)));
 
     Xe_current = Xe_tmp_spline(x_array[i]); 
@@ -144,6 +144,7 @@ std::pair<double,double> RecombinationHistory::electron_fraction_from_saha_equat
   // Solve the Saha equation to get ne and Xe
   const double a           = exp(x);
   const double n_H         = (OmegaB0*rho_c0/(m_H*pow(a,3)));
+  const double dimension_Xe_saha = pow(hbar, -3)*pow(k_b, 3./2);
   
   // The RHS in Saha equation
   double A  = dimension_Xe_saha*exp(-(epsilon_0)/(k_b*TCMB0/a))/n_H * pow(m_e*(TCMB0/a)/(2*M_PI),3./2.);

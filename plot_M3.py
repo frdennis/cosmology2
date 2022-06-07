@@ -8,6 +8,17 @@ import matplotlib.pyplot as plt
 data = np.loadtxt("perturbations_k0.01.txt")
 data2 = np.loadtxt("perturbations_k0.1.txt")
 data3 = np.loadtxt("perturbations_k0.001.txt")
+data4 = np.loadtxt("perturbations_k0.3.txt")
+
+fig, ax = plt.subplots()
+ax.plot(data[:,0], data[:,-1])
+ax.plot(data2[:,0], data2[:,-1])
+ax.plot(data3[:,0], data3[:,-1])
+ax.plot(data4[:,0], data4[:,-1])
+ax.set_xlim(-8,0); ax.set_ylim(-1,3)
+plt.show()
+
+#quit()
 
 path = "figures/milestone3/"
 
@@ -27,6 +38,7 @@ a_acc = ((OmegaCDM0+OmegaB0)/(2*OmegaLambda0))**(1/3)
 a_rec = (1.0 / (1.0 + 2000.0))
 a_dec = (1.0 / (1.0 + 1100.0))
 a_today = 1
+print("Value of x at recombination: ", np.log(a_rec))
 
 """ Density contrast """
 deltacdm    = data[:,1]
@@ -41,8 +53,7 @@ Theta0      = data[:,5]
 Theta0_2    = data2[:,5]
 Theta0_3    = data3[:,5]
 
-fig, ax = plt.subplots(figsize=(6,5)) # (6,5)
-# 
+fig, ax = plt.subplots(figsize=(6,5)) # (6,5) 
 ax.plot(a, deltacdm2, label='k = 0.1 h/Mpc', color='black')
 ax.plot(a, abs(deltab2), ls='--', color='black')
 ax.plot(a, 3*abs(Theta0_2), ls=':', color='black')
@@ -123,17 +134,17 @@ v_nu2    = - 3*data2[:,12]
 v_nu3    = - 3*data3[:,12]
 
 fig, ax = plt.subplots(figsize=(6,5))
-ax.plot(a, v_cdm2, label='k = 0.1/Mpc', color='black')
+ax.plot(a, v_cdm2, label='k = 0.1 h/Mpc', color='black')
 ax.plot(a, abs(v_b2), ls='--', color='black')
 ax.plot(a, abs(v_photons2), ls=':', color='black')
 #ax.plot(a, abs(v_nu2), ls='-.', color='darkred')
 
-ax.plot(a, v_cdm, label='k = 0.01/Mpc', color='blue')
+ax.plot(a, v_cdm, label='k = 0.01 h/Mpc', color='blue')
 ax.plot(a, abs(v_b), ls='--', color='blue')
 ax.plot(a, abs(v_photons), ls=':', color='blue')
 #ax.plot(a, abs(v_nu), ls='-.', color='lime')
 
-ax.plot(a, v_cdm3, label='k = 0.001/Mpc', color='red')
+ax.plot(a, v_cdm3, label='k = 0.001 h/Mpc', color='red')
 ax.plot(a, abs(v_b3), ls='--', color='red')
 ax.plot(a, abs(v_photons3), ls=':', color='red')
 #ax.plot(a, abs(v_nu3), ls='-.', color='dimgray')
@@ -152,16 +163,16 @@ plt.show()
 
 """ v photons and neutrinos """
 fig, ax = plt.subplots(figsize=(6,5))
-ax.plot(a, abs(v_b2), label='k = 0.1/Mpc', color='black')
+ax.plot(a, abs(v_b2), label='k = 0.1 h/Mpc', color='black')
 #ax.plot(a, abs(v_photons2), ls='--', color='black')
 ax.plot(a, abs(v_nu2), ls='--', color='black')
 
-ax.plot(a, abs(v_b), label='k = 0.01/Mpc', color='blue')
+ax.plot(a, abs(v_b), label='k = 0.01 h/Mpc', color='blue')
 #ax.plot(a, abs(v_photons), ls='--', color='blue')
 ax.plot(a, abs(v_nu), ls='--', color='blue')
 #ax.plot(a, abs(v_nu), ls='-.', color='lime')
 
-ax.plot(a, abs(v_b3), label='k = 0.001/Mpc', color='red')
+ax.plot(a, abs(v_b3), label='k = 0.001 h/Mpc', color='red')
 #ax.plot(a, abs(v_photons3), ls='--', color='red')
 ax.plot(a, abs(v_nu3), ls='--', color='red')
 
@@ -187,9 +198,9 @@ Phi2        = data2[:,14]
 Phi3        = data3[:,14]
 
 fig, ax = plt.subplots(figsize=(6,5))
-ax.plot(a, Psi2 + Phi2, label='k = 0.1/Mpc', color='red')
-ax.plot(a, Psi + Phi, label='k = 0.01/Mpc', color='g')
-ax.plot(a, Psi3 + Phi3, label='k = 0.001/Mpc', color='k')
+ax.plot(a, Psi2 + Phi2, label='k = 0.1 h/Mpc', color='red')
+ax.plot(a, Psi + Phi, label='k = 0.01 h/Mpc', color='g')
+ax.plot(a, Psi3 + Phi3, label='k = 0.001 h/Mpc', color='k')
 
 ax.vlines(a_dec, -1e-1, 1e1, color="gray", ls="--", label='Photon Decoupling')
 ax.vlines(a_mat_rad, -1e-1, 1e1, color="orange", ls="--", label='Matter-Radiation eq.')
@@ -216,26 +227,76 @@ Thetap2_2   = data2[:,10]
 Thetap2_3   = data3[:,10]
 
 fig, ax = plt.subplots(figsize=(12,4), ncols=3)
-ax[0].plot(a, Thetap0, label='k = 0.01/Mpc', color='g')
-ax[0].plot(a, Thetap0_2, label='k = 0.1/Mpc', color='red')
-ax[0].plot(a, Thetap0_3, label='k = 0.001/Mpc', color='k')
+ax[0].plot(a, Thetap0, label='k = 0.01 h/Mpc', color='g')
+ax[0].plot(a, Thetap0_2, label='k = 0.1 h/Mpc', color='red')
+ax[0].plot(a, Thetap0_3, label='k = 0.001 h/Mpc', color='k')
 ax[0].set_ylabel(r'$\Theta^P_0$')
+ax[0].set_ylim(-0.02, 0.035)
 
-ax[1].plot(a, Thetap1, label='k = 0.01/Mpc', color='g')
-ax[1].plot(a, Thetap1_2, label='k = 0.1/Mpc', color='red')
-ax[1].plot(a, Thetap1_3, label='k = 0.001/Mpc', color='k')
+ax[1].plot(a, Thetap1, label='k = 0.01 h/Mpc', color='g')
+ax[1].plot(a, Thetap1_2, label='k = 0.1 h/Mpc', color='red')
+ax[1].plot(a, Thetap1_3, label='k = 0.001 h/Mpc', color='k')
 ax[1].set_ylabel(r'$\Theta^P_1$')
 ax[1].set_xlabel(r'Scalefactor $a$')
+ax[1].set_ylim(-0.007, 0.015)
 
-ax[2].plot(a, Thetap2, label='k = 0.01/Mpc', color='g')
-ax[2].plot(a, Thetap2_2, label='k = 0.1/Mpc', color='red')
-ax[2].plot(a, Thetap2_3, label='k = 0.001/Mpc', color='k')
+ax[2].plot(a, Thetap2, label='k = 0.01 h/Mpc', color='g')
+ax[2].plot(a, Thetap2_2, label='k = 0.1 h/Mpc', color='red')
+ax[2].plot(a, Thetap2_3, label='k = 0.001 h/Mpc', color='k')
 ax[2].set_ylabel(r'$\Theta^P_2$')
+ax[2].set_ylim(-0.007, 0.015)
+
 plt.tight_layout()
-[[axi.grid(), axi.set_xscale("log"), axi.set_xlim(5e-5, 2e-1)] for axi in ax]
+[[axi.grid(), axi.set_xscale("log"), axi.set_xlim(5e-5, 2e-1), axi.vlines(a_dec, -1e1, 1e1, color="gray", ls="--", label='Photon Decoupling'), 
+axi.vlines(a_mat_rad, -1e1, 1e1, color="orange", ls="--", label='Matter-Radiation eq.'), 
+axi.vlines(a_mat_lambda, -1e1, 1e1, color="pink", ls="--", label='Matter-DE eq.')] for axi in ax]
+ax[0].legend()
 plt.savefig(path+'polarization.pdf')
 plt.show()
 
+""" Curvature """
+
+Phi         = data[:,14]
+Phi2        = data2[:,14]
+Phi3        = data3[:,14]
+
+fig, ax = plt.subplots(figsize=(6,5))
+ax.plot(a, Phi, label='k = 0.01/Mpc', color='g')
+ax.plot(a, Phi2, label='k = 0.1/Mpc', color='red')
+ax.plot(a, Phi3, label='k = 0.001/Mpc', color='k')
+
+ax.vlines(a_dec, -1e-1, 1e1, color="gray", ls="--", label='Photon Decoupling')
+ax.vlines(a_mat_rad, -1e-1, 1e1, color="orange", ls="--", label='Matter-Radiation eq.')
+ax.vlines(a_mat_lambda, -1e-1, 1e1, color="pink", ls="--", label='Matter-DE eq.')
+
+ax.set_xscale("log");
+ax.set_xlim(1e-6, 1e1); ax.set_ylim(-0.01, 0.8)
+ax.set_ylabel(r"$\Phi$"); ax.set_xlabel(r"Scalefactor $a$")
+ax.grid(); ax.legend()
+ax.set_title(r'Spatial curvature perturbation $\Phi$')
+plt.savefig(path+"curvature.pdf")
+plt.show()
+
+Psi         = data[:,15]
+Psi2        = data2[:,15]
+Psi3        = data3[:,15]
+
+fig, ax = plt.subplots(figsize=(6,5))
+ax.plot(a, Psi, label='k = 0.01/Mpc', color='g')
+ax.plot(a, Psi2, label='k = 0.1/Mpc', color='red')
+ax.plot(a, Psi3, label='k = 0.001/Mpc', color='k')
+
+ax.vlines(a_dec, -1e1, 1e1, color="gray", ls="--", label='Photon Decoupling')
+ax.vlines(a_mat_rad, -1e1, 1e1, color="orange", ls="--", label='Matter-Radiation eq.')
+ax.vlines(a_mat_lambda, -1e1, 1e1, color="pink", ls="--", label='Matter-DE eq.')
+
+ax.set_xscale("log");
+ax.set_xlim(1e-6, 1e1); ax.set_ylim(-0.7, 0.1)
+ax.set_ylabel(r"$\Psi$"); ax.set_xlabel(r"Scalefactor $a$")
+ax.grid(); ax.legend()
+ax.set_title(r'Newtonian potential perturbation $\Psi$')
+plt.savefig(path+"potential.pdf")
+plt.show()
 quit()
 
 Theta0      = data[:,5]

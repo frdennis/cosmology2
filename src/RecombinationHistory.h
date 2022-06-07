@@ -34,9 +34,6 @@ class RecombinationHistory{
 
     const double OmegaB0     = cosmo->get_OmegaB(0.0);
     const double OmegaR0     = cosmo->get_OmegaR(0.0);
-
-    // Dimensions
-    const double dimension_Xe_saha = pow(hbar, -3)*pow(k_b, 3./2);
     
     // Helium fraction
     double Yp;

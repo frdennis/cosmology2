@@ -1,0 +1,82 @@
+Checklist for correcting past Milestones:
+
+====================  MILESTONE I ====================  
+
+Theory section:
+OK (removed) - "k = +1, 0 or -1": No, that's for the toy example. When applied to the universe,
+k has units 1/m², and can take any value. Remember: Omega_k0 = -kc^2/H_0^2 so not only 3 values are allowed.
+OK - Skriv ned de kosmologiske parameterne du bruker.
+OK - Bra analytiske formler for a_eq, men skulle ønske du satte in tall der også,
+så man slipper å lete etter tallene i tabell 2.
+
+OK - Eq. 6: should be Omega_M0 og Omega_R0 (they are defined at z=0).
+
+Results
+OK - Eq. 31-33 mangler H0	
+OK - Det hadde vært fint om figurene gikk litt lenger fram i tid. Da kunne vi sett
+mer av den fremtidge utviklingen. Vanskelig å se fra figur 4 at η(x) stagnerer
+(selv om det stemmer) fordi den stopper for tidlig.
+
+OK - η(x)-forklaring uklar. Jeg foreslår å tenke på hvordan lysets hastighet i
+medbevegende koordinater utvikler seg over tid.
+	
+OK - Teksten sier at "we see exactly what we expect" i figur 10, nemlig at ηℋ/c = 1
+i det tidlige universet. Men det er ikke det figuren viser i det hele tatt. Der er verdien ca. 1e-23. Så her er det noe galt.
+
+OK (removed) - "We see that the scale factor increases increasingly more rapid
+for each era". Dette er ikke riktig. Som du sa i tabell 2 ble
+d²a/dt² først positiv rundt a=0.6. Fram til da utvida den seg
+saktere og saktere med tiden. Det er bare log-log-skalen som lurer
+deg. I starten går a som t(1/2) og i materiedominans går den som
+t(2/3). Begge disse er decelererende kurver.
+
+====================  MILESTONE II ====================  
+
+3.1
+FIXED I Eq 45: ~g is already normalised, no extra normalisation is needed.
+
+OK I "we can bypass this by rewriting the equation system in terms of fractions":
+This makes it sound like you've stabilized the equation in the Xe ~ 1 regime,
+in which case you wouldn't need Saha, but that's not the case, is it?
+
+OK I Freeze-out doesn't just happen because most free electrons have been spent,
+it also happens because of dilution due to the universe's expansion.
+
+ANSWERED B What would the value of Xe be today if you included reionization?
+
+FIXED - I Considering the approximations and splining done here, I suspect that you
+don't actually have 7 digits of accuracy, so I would give numbers with
+fewer significant digits.
+
+OK - I You have a {}-problem in x_decoupling and z_decoupling on page 9
+
+OK (REMOVED, MOVED TO EXPLANATION OF VISIBILITY FUNCTION) - The explanation for the peak in τ" is not convincing. "The fact that this
+peak is very sharp corresponds to the fact that recombination
+happened in a very thing shell around us around redshift z ~ 1100": Didn't
+you say earlier that recombination happened around z = 1300?
+
+NORMALIZATION FIXED - In figure 14, the bump covers Δx ~ 1, but the peak value is < 0.1, so
+integral is clearly < 0.1, and not 1 as it should be. This would have
+been easier to notice if you had used x on the horizontal axis instead of a.
+
+FIXED, You have a bug in your normalisation of g. See below under code.
+
+ANSWERED I How does the difference between T and Tb in figure 15 affect ~g? Is it
+an important correction?
+
+
+Code:
+FIXED - When normalising the visibility function you forgot dx when summing,
+getting the wrong integral and therefore normalising ~g(x) (and its
+derivatives) to the wrong value. This will lead to mistakes in future milestones if not fixed.
+If you add the dx term then you would see that sum == 1.0 making this step is unnecessary.
+
+FIXED - If [i_end] is the last value you store when Saha is still valid, then [i => iend+1] at the end of the while loop so you integrate Peebles from [i = iend+1] when it should be [iend]. So you should start at x_array[i-1] for Peebles. This can most easily be solved by doing a [i--] after the while.
+
+FIXED I while(not saha_regime && ...) : The first clause does nothing as saha_regime its always true here.
+
+FIXED I The Saha regime calculation is fine, but why place dimension_Xe_saha in the header? This is not used anywhere else and just makes the code harder to read. Keep it where it belongs.
+
+====================  MILESTONE III ====================  
+NO CHANGE
+

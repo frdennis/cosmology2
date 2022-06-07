@@ -21,9 +21,8 @@ BackgroundCosmology::BackgroundCosmology(
   // We compute the missing constants:
   H0      = Constants.H0_over_h*h;            // Hubble constant
   OmegaK  = 0.0;                              // Flat curvature (Curvature density = 1 - OmegaM - OmegaR - OmegaNu - OmegaLambda)
-  double pi = 3.14159265358979;
-  OmegaR  = 2*std::pow(pi,2)/30 * std::pow(Constants.k_b*TCMB,4)/pow(Constants.hbar, 3)/pow(Constants.c,5)
-  * 8*pi*Constants.G/(3*std::pow(H0,2));  // Photon density today (follows from TCMB):
+  OmegaR  = 2*std::pow(M_PI,2)/30 * std::pow(Constants.k_b*TCMB,4)/pow(Constants.hbar, 3)/pow(Constants.c,5)
+  * 8*M_PI*Constants.G/(3*std::pow(H0,2));  // Photon density today (follows from TCMB):
   OmegaNu = Neff*7.0/8.0*pow((4.0/11.0), (4.0/3.0))*OmegaR;    // Neutrino density today (master students ignore this)
   // and lastly, dark energy parameter which follows from a(today) = 1 ...
   OmegaLambda = 1 - (OmegaB + OmegaCDM + OmegaR + OmegaNu + OmegaK);
@@ -33,7 +32,6 @@ BackgroundCosmology::BackgroundCosmology(
   OmegaRad = OmegaR + OmegaNu;
 
   // It is useful to collect some variables here
-  mytruth = (OmegaK < 0)*1 + (OmegaK == 0)*2 + (OmegaK > 0)*3;
   int npts = 300;
 
   // We create our vectors
@@ -176,15 +174,12 @@ double BackgroundCosmology::comoving_distance(double eta) const{
   // define chi 
   double chi = eta_of_x(0) - eta;
   // use cases instead of if statemenets
+  if( abs(OmegaK) == 0) return chi;
+  if(OmegaK > 0.0)
+    return chi*sinh(sqrt(abs(OmegaK))*H0*chi/Constants.c)/sqrt(abs(OmegaK))*H0*chi/Constants.c;
+  else
+    return chi*sin(sqrt(abs(OmegaK))*H0*chi/Constants.c)/(sqrt(abs(OmegaK))*H0*chi/Constants.c);
 
-  switch(mytruth){
-    case(1):
-      return chi*sin(sqrt(abs(OmegaK))*H0*chi/Constants.c)/(sqrt(abs(OmegaK))*H0*chi/Constants.c);
-    case(2):
-      return chi;
-    case(3):
-      return chi*sinh(sqrt(abs(OmegaK))*H0*chi/Constants.c)/sqrt(abs(OmegaK))*H0*chi/Constants.c;
-  }
   return 0.0;
 }
 
@@ -262,7 +257,7 @@ void BackgroundCosmology::info() const{
 //====================================================
 void BackgroundCosmology::output(const std::string filename) const{
   const double x_min = log(1e-5);
-  const double x_max =  1.0;
+  const double x_max =  5.0;
   const int    n_pts =  200;
   
   Vector x_array = Utils::linspace(x_min, x_max, n_pts);

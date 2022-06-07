@@ -81,9 +81,12 @@ int main(int argc, char **argv){
 
   kvalue = 0.1 * h / Constants.Mpc;
   pert.output(kvalue, "perturbations_k0.1.txt");
+
+  kvalue = 0.3 * h / Constants.Mpc;
+  pert.output(kvalue, "perturbations_k0.3.txt");
   
   // Remove when module is completed
-  return 0;
+  // return 0;
   
   //=========================================================================
   // Module IV
@@ -92,9 +95,10 @@ int main(int argc, char **argv){
   PowerSpectrum power(&cosmo, &rec, &pert, A_s, n_s, kpivot_mpc);
   power.solve();
   power.output("cells.txt");
+  power.output_x("theta.txt");
   
   // Remove when module is completed
-  return 0;
+  // return 0;
 
   Utils::EndTiming("Everything");
 }

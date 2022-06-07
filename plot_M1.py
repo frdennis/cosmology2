@@ -181,7 +181,7 @@ plt.show()
 """ eta H """
 fig, ax = plt.subplots(figsize=(10,5))
 ax.set_yscale("log")
-y = eta*Hp/c
+y = data[:,1]*data[:,2]/c #eta*Hp/c/m_to_Mpc
 ax.plot(a, y); ax.grid()
 ax.set_xscale("log")
 ax.set_xlabel('Scalefactor a'); ax.set_ylabel(r"$\frac{\eta(x)\mathcal{H}(x)}{c}$")
